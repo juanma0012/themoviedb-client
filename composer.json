@@ -1,0 +1,7 @@
+{
+	"name":"themoviedb client",
+    "require": {
+		"slim/slim": "^3.0",
+		"guzzlehttp/guzzle": "^6.2"
+	}
+}
