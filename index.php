@@ -41,7 +41,8 @@ $app->get('/search/{query}/page/{page}', function (Request $request, Response $r
 	$client   = new Client;
 	$res      = $client->getResults($query,$page);
 	
-	$response = $response->withHeader('Content-type', 'application/json');
+	$response = $response->withAddedHeader('Content-type', 'application/json');
+	$response = $response->withAddedHeader('Access-Control-Allow-Origin', '*');
 	$response->getBody()->write($res);
     return $response;
 });
@@ -53,7 +54,8 @@ $app->get('/actor/{actor_id}/movies/page/{page}', function (Request $request, Re
 	$client   = new Client;
 	$res      = $client->getMoviesByActor($actor_id, $page);
 	
-	$response = $response->withHeader('Content-type', 'application/json');
+	$response = $response->withAddedHeader('Content-type', 'application/json');
+	$response = $response->withAddedHeader('Access-Control-Allow-Origin', '*');
 	$response->getBody()->write($res);
     return $response;
 });
@@ -64,7 +66,8 @@ $app->get('/movie/{movie_id}', function (Request $request, Response $response) {
 	$client   = new Client;
 	$res      = $client->getMovie($movie_id);
 	
-	$response = $response->withHeader('Content-type', 'application/json');
+	$response = $response->withAddedHeader('Content-type', 'application/json');
+	$response = $response->withAddedHeader('Access-Control-Allow-Origin', '*');
 	$response->getBody()->write($res);
     return $response;
 });
