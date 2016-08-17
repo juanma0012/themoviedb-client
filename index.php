@@ -34,6 +34,14 @@ class Client {
 			return json_encode (json_decode ("{}"));
 		}
     }
+    public function getPopularMovies() {
+    	$url = $this->base_url."movie/popular?api_key=".$this->api_key;
+    	try {
+        	return $this->guzzle->request('GET', $url)->getBody();
+        } catch (GuzzleHttp\Exception\ClientException $e) {
+			return json_encode (json_decode ("{}"));
+		}
+    }
     public function getMoviesByActor($actor_id, $page = 1) {
     	$url = $this->base_url."discover/movie?with_cast=".$actor_id."&api_key=".$this->api_key."&language='en-US'&sort_by=release_date.desc&page=".$page;
     	try {
@@ -109,6 +117,17 @@ $app->get('/person/{person_id}', function (Request $request, Response $response)
 	
 	$client   = new Client;
 	$res      = $client->getPerson($person_id);
+	
+	$response = $response->withAddedHeader('Content-type', 'application/json');
+	$response = $response->withAddedHeader('Access-Control-Allow-Origin', '*');
+	$response->getBody()->write($res);
+    return $response;
+});
+
+$app->get('/movie/popular}', function (Request $request, Response $response) {
+	
+	$client   = new Client;
+	$res      = $client->getPopularMovies();
 	
 	$response = $response->withAddedHeader('Content-type', 'application/json');
 	$response = $response->withAddedHeader('Access-Control-Allow-Origin', '*');
