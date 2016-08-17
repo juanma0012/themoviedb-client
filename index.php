@@ -46,9 +46,7 @@ class Client {
     	$url = $this->base_url."search/multi?query=".$query."&api_key=".$this->api_key."&language='en-US'&page=".$page;
     	try {
         	$json_result = json_decode($this->guzzle->request('GET', $url)->getBody());
-        	echo "entra try resutls";
         } catch (GuzzleHttp\Exception\ClientException $e) {
-        	echo $e;
 			return json_encode (json_decode ("{}"));
 		}
         foreach ($json_result->results as $result) {
