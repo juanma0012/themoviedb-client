@@ -35,16 +35,16 @@ class Client {
 		}
     }
     public function getPopularMovies() {
-    	$url = $this->base_url."movie/popular?api_key=".$this->api_key;
     	try {
+    		$url = $this->base_url."movie/popular?api_key=".$this->api_key;
         	return $this->guzzle->request('GET', $url)->getBody();
         } catch (GuzzleHttp\Exception\ClientException $e) {
 			return json_encode (json_decode ("{}"));
 		}
     }
     public function getMoviesByActor($actor_id, $page = 1) {
-    	$url = $this->base_url."discover/movie?with_cast=".$actor_id."&api_key=".$this->api_key."&language='en-US'&sort_by=release_date.desc&page=".$page;
     	try {
+    		$url = $this->base_url."discover/movie?with_cast=".$actor_id."&api_key=".$this->api_key."&language='en-US'&sort_by=release_date.desc&page=".$page;
         	return $this->guzzle->request('GET', $url)->getBody();
         } catch (GuzzleHttp\Exception\ClientException $e) {
 			return json_encode (json_decode ("{}"));
@@ -124,7 +124,7 @@ $app->get('/person/{person_id}', function (Request $request, Response $response)
     return $response;
 });
 
-$app->get('/movie/popular', function (Request $request, Response $response) {
+$app->get('/movies/popular', function (Request $request, Response $response) {
 	
 	$client   = new Client;
 	$res      = $client->getPopularMovies();
