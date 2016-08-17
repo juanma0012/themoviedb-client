@@ -124,7 +124,7 @@ $app->get('/person/{person_id}', function (Request $request, Response $response)
     return $response;
 });
 
-$app->get('/movie/popular}', function (Request $request, Response $response) {
+$app->get('/movie/popular', function (Request $request, Response $response) {
 	
 	$client   = new Client;
 	$res      = $client->getPopularMovies();
