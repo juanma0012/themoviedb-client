@@ -81,6 +81,17 @@ class Client {
 
 $app = new \Slim\App;
 
+$app->get('/', function (Request $request, Response $response) {
+	
+	$client   = new Client;
+	$res      = json_encode (json_decode ("{}"));
+	
+	$response = $response->withAddedHeader('Content-type', 'application/json');
+	$response = $response->withAddedHeader('Access-Control-Allow-Origin', '*');
+	$response->getBody()->write($res);
+    return $response;
+});
+
 $app->get('/search/{query}/page/{page}', function (Request $request, Response $response) {
 	$query    = $request->getAttribute('query');
 	$page     = $request->getAttribute('page');
