@@ -78,12 +78,6 @@ class Client {
 		return json_encode($json_result);
     }
 }
-/*
-	$client   = new Client;
-	$query = "leonardo dicaprio";
-	$res      = $client->getResults($query,1);
-	echo $res;
-*/
 
 $app = new \Slim\App;
 
